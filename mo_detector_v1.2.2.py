@@ -1,11 +1,8 @@
-import cv2
+import cv2, time
 import numpy as np
-import time
-
 
 #InitFrames and Capture + Motion List decl.
 first_frame = None
-motion_events = []
 
 #Set VideoCapture to an address ranging from 0 to n, a video file (.mp4, avi...) or other video source. Mine is set to my webcam.
 video = cv2.VideoCapture(0)
@@ -17,8 +14,7 @@ while True:
     time.sleep(0.1)
     #Capture Declaration
     check, frame = video.read()
-    motion_status = 0  
-    
+        
     #Grayscale and blur
     prepared_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)    
     prepared_frame = cv2.GaussianBlur(src=prepared_frame, ksize=(5, 5), sigmaX=0)
@@ -47,7 +43,6 @@ while True:
     for contour in cnts:
         if cv2.contourArea(contour) < obj_size:
             continue
-        motion_status = 1
         (x, y, w, h) = cv2.boundingRect(contour)
         cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 3) 
 
@@ -62,8 +57,6 @@ while True:
     key = cv2.waitKey(1)
     if key == ord('q'):
         break
-    print(motion_status)
  
-
 video.release()
 cv2.destroyAllWindows()
