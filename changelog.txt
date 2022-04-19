@@ -1,0 +1,6 @@
+##v1.2.2
+
+-Tweaks:
+*Reduced framerate + detection sensitivity (adjustable through time.sleep)
+*Increased contour drawing size (adjutable through obj_size variable)
+

@@ -1,8 +1,11 @@
 import cv2
 import numpy as np
+import time
 
-#InitFrames and Capture
+
+#InitFrames and Capture + Motion List decl.
 first_frame = None
+motion_events = []
 
 #Set VideoCapture to an address ranging from 0 to n, a video file (.mp4, avi...) or other video source. Mine is set to my webcam.
 video = cv2.VideoCapture(0)
@@ -10,8 +13,11 @@ video.set(cv2.CAP_PROP_POS_FRAMES, 20)
 
 while True:
 
-    #Capture
-    check, frame = video.read()  
+    #Framerate Adjust
+    time.sleep(0.1)
+    #Capture Declaration
+    check, frame = video.read()
+    motion_status = 0  
     
     #Grayscale and blur
     prepared_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)    
@@ -36,10 +42,12 @@ while True:
     #Draw rectangles
     (cnts,_ ) = cv2.findContours(image=thresh_delta, mode=cv2.RETR_EXTERNAL, method=cv2.CHAIN_APPROX_SIMPLE)
 
+    #The larger the number, the larger the object contour.
+    obj_size = 5000
     for contour in cnts:
-        if cv2.contourArea(contour) < 1000:
+        if cv2.contourArea(contour) < obj_size:
             continue
-
+        motion_status = 1
         (x, y, w, h) = cv2.boundingRect(contour)
         cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 3) 
 
@@ -54,9 +62,8 @@ while True:
     key = cv2.waitKey(1)
     if key == ord('q'):
         break
+    print(motion_status)
  
-
-#git test
 
 video.release()
 cv2.destroyAllWindows()
