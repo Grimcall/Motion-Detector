@@ -9,7 +9,7 @@ times = []
 df = pandas.DataFrame(columns=["Start", "End"])
 
 #Set VideoCapture to an address ranging from 0 to n, a video file (.mp4, avi...) or other video source. Mine is set to my webcam.
-video = cv2.VideoCapture(0)
+video = cv2.VideoCapture(1)
 video.set(cv2.CAP_PROP_POS_FRAMES, 20)
 
 while True:
@@ -53,6 +53,8 @@ while True:
         cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 3) 
     motion_events.append(motion_status)
 
+    motion_status = motion_events[-2:]
+    
     if motion_events[-1] == 1 and motion_events[-2] == 0:
         times.append(datetime.now())
     if motion_events[-1] == 0 and motion_events[-2] == 1:
@@ -71,10 +73,11 @@ while True:
             times.append(datetime.now())
         break
     
-for i in range(0, len(times), 2):
-    df = df.append({"Start": times[i], "End": times[i+1]}, ignore_index= True)
+#FURTHER TESTING REQUIRED    
+for i in range(0, (len(times))-1, 2):
+    df = df.append({"Start": times[i], "End": times[i+1]}, ignore_index = True)
 
-df.to_csv("Times.csv")
+df.to_csv("Motion_Events.csv")
 
 video.release()
 cv2.destroyAllWindows()

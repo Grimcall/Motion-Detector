@@ -4,6 +4,8 @@
 -Version 1.2.2 is the same file without .csv conversions or time recording. Essentially just a motion tracker.
 
 -Additions:
+*Updated requirements.txt
+*Added event_recorder.py with Bokeh graphing. Outputs an .html file with recorded events and the specific times.
 *Added motion events. Exports a .csv file with detected motion events and the times at which they were detected.
 
 -Tweaks:
@@ -11,9 +13,8 @@
 *Increased contour drawing size (adjutable through obj_size variable)
 
 -To add:
-*Graphing system for resulting .csv file
-
-
+*Details in resulting .html from event_recorder.py
+*Speed Monitor
 
 
 

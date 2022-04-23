@@ -1,2 +1,4 @@
+bokeh==2.4.2
 numpy==1.22.2
 opencv_python==4.5.5.62
+pandas==1.4.0
