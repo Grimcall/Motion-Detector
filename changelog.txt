@@ -1,4 +1,12 @@
-##Version 1.3
+##Version 1.4.1b
+
+##TESTING REQUIRED, I DON'T THINK THE EVENT RECORDER WORKS 100% YET##
+-Additions:
+*Hovertool for event_recorder.py graph.
+*currently TESTING Date functionality for Bokeh Graph.
+
+
+##Version 1.4
 
 -Notes:
 -Version 1.2.2 is the same file without .csv conversions or time recording. Essentially just a motion tracker.
@@ -13,6 +21,7 @@
 *Increased contour drawing size (adjutable through obj_size variable)
 
 -To add:
+*Hovertool
 *Details in resulting .html from event_recorder.py
 *Speed Monitor
 
